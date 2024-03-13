@@ -40,3 +40,16 @@ public class Convertidor {
         }
     }
 }
+
+
+    private static void generarPDF(String inputPath, String outputPath) throws Exception {
+        Document document = XMLResource.load(inputPath).getDocument();
+        ITextRenderer renderer = new ITextRenderer();
+        renderer.setDocument(document, null);
+        renderer.layout();
+        try (FileOutputStream fos = new FileOutputStream(outputPath)) {
+            renderer.createPDF(fos);
+        }
+    }
+}
+
